@@ -10,13 +10,20 @@ export default function Card({ recipe }) {
     },
   ];
   return (
-    <a href={recipe.link} target="_blank">
-      <div className="flex my-5 mx-5 bg-slate-600 rounded-lg shadow-lg overflow-hidden w-80 h-80 flex-col">
+    <div className="">
+      <Link
+        href={recipe.link}
+        target="_blank"
+        className="flex my-5 mx-5 bg-slate-600 rounded-lg shadow-lg  w-80 h-80 flex-col"
+      >
         <div className="p-5 m-auto flex items-center justify-around h-full flex-col text-center">
           <h1 className="text-white text-xl font-bold">{recipe.title}</h1>
           <p>{recipe.desc}</p>
         </div>
-      </div>
-    </a>
+        <small className="self-end mx-3 my-1 text-gray-400">
+          Click to Veiw Recipe
+        </small>
+      </Link>
+    </div>
   );
 }
