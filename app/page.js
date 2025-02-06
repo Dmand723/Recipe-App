@@ -1,5 +1,17 @@
+"use client";
+
 import Card from "@/components/card";
+import { useContext } from "react";
+import { recipeContex } from "@/lib/api-handler/recipeHandler";
 
 export default function Home() {
-  return <Card />;
+  const { publicRecipes } = useContext(recipeContex);
+
+  return (
+    <div>
+      {publicRecipes.map((recipe) => {
+        return <Card key={recipe.id} recipe={recipe} />;
+      })}
+    </div>
+  );
 }
