@@ -3,6 +3,7 @@ import "./globals.css";
 
 import AuthContextProvider from "@/lib/api-handler/auth-contex";
 import RecipeContexProvider from "@/lib/api-handler/recipeHandler";
+import NavBar from "@/components/navBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,7 +27,10 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthContextProvider>
-          <RecipeContexProvider>{children}</RecipeContexProvider>
+          <RecipeContexProvider>
+            <NavBar />
+            {children}
+          </RecipeContexProvider>
         </AuthContextProvider>
       </body>
     </html>
