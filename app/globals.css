@@ -30,4 +30,13 @@
   .btn-disabled {
     @apply border border-gray-500 text-gray-500 hover:scale-100;
   }
+  .inputs {
+    @apply mb-4 p-2 border border-gray-300 rounded w-full bg-blue-400 text-black;
+  }
+  .inputs::placeholder {
+    color: #0b2c65; /* Customize this color as needed */
+  }
+  .admin-headers {
+    @apply text-4xl font-bold text-center text-gray-800;
+  }
 }
