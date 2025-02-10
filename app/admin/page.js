@@ -1,81 +1,75 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 import { authContext } from "@/lib/api-handler/auth-contex";
 import { recipeContex } from "@/lib/api-handler/recipeHandler";
+import Card from "@/components/card";
+import AddRecipe from "@/components/addRecipe";
+import EditRecipe from "@/components/editRecipe";
 
 export default function Admin() {
   const { checkAdmin, user, loading } = useContext(authContext);
   const [isAdmin, setIsAdmin] = useState(false);
-  const { addPublicRecipe } = useContext(recipeContex);
-  const adminCheck = async () => {
-    const check = await checkAdmin();
+  const [editOpen, setEditOpen] = useState(false);
+  const [recipeToEdit, setRecipeToEdit] = useState(null);
 
-    setIsAdmin(check);
+  const { publicRecipes } = useContext(recipeContex);
+
+  const editRecipeHandler = (r) => {
+    setRecipeToEdit(r);
+    setEditOpen(!editOpen);
   };
-  if (!loading) {
-    adminCheck();
-    if (!isAdmin) {
-      return (
-        <div className="bg-black  min-h-screen flex items-center justify-center ">
-          {/* <h1 className="text-white font-bold text-9xl">Unauthorized</h1> */}
-          <img src="/no.png" className="h-[600px] w-[950px]" alt="LOL" />
-        </div>
-      );
-    }
-  }
-  const addRecipeHandler = (data) => {
-    const newRecipe = {
-      createdBy: user.displayName,
-      ...data,
+
+  useEffect(() => {
+    const adminCheck = async () => {
+      const check = await checkAdmin();
+
+      setIsAdmin(check);
     };
-    addPublicRecipe(newRecipe);
-  };
+    if (!loading) {
+      adminCheck();
+    }
+  }, [loading, checkAdmin]);
+
+  if (!isAdmin) {
+    return (
+      <div className="bg-black  min-h-screen flex items-center justify-center ">
+        {/* <h1 className="text-white font-bold text-9xl">Unauthorized</h1> */}
+        <img src="/no.png" className="h-[600px] w-[950px]" alt="LOL" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-start justify-center">
       {!loading ? (
         <div className="flex flex-col gap-10 justify-center items-center">
           <h1 className="admin-headers">Tools</h1>
-          <form
-            className="bg-blue-200 p-8 rounded-lg shadow-lg w-full max-w-md"
-            onSubmit={(e) => {
-              e.preventDefault();
-              const formData = {
-                title: e.target.title.value,
-                desc: e.target.desc.value,
-                link: e.target.link.value,
-              };
-              addRecipeHandler(formData);
-            }}
-          >
-            <h2 className="text-2xl font-bold mb-6 text-center">Add Recipe</h2>
-            <input
-              className="inputs"
-              type="text"
-              name="title"
-              placeholder="Title"
-            />
-            <input
-              className="inputs"
-              type="text"
-              name="desc"
-              placeholder="Description"
-            />
-            <input
-              className=" inputs"
-              type="text"
-              name="link"
-              placeholder="Link"
-            />
-            <button
-              className="bg-blue-500 text-white py-2 px-4 rounded w-full hover:bg-blue-600"
-              type="submit"
-            >
-              Submit
-            </button>
-          </form>
+          <div className="flex gap-7">
+            <AddRecipe />
+            {editOpen && (
+              <EditRecipe recipe={recipeToEdit} onClose={setEditOpen} />
+            )}
+          </div>
           <h1 className="admin-headers">Public Recipes</h1>
+          <div className="flex flex-wrap">
+            {publicRecipes.map((recipe) => {
+              return (
+                <Card key={recipe.id} recipe={recipe}>
+                  <div>
+                    <button
+                      className="btn btn-edit"
+                      onClick={() => {
+                        editRecipeHandler(recipe);
+                      }}
+                    >
+                      Edit
+                    </button>
+                  </div>
+                </Card>
+              );
+            })}
+          </div>
         </div>
       ) : (
         <h1>Loading...</h1>

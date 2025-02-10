@@ -8,7 +8,7 @@ export default function Home() {
   const { publicRecipes } = useContext(recipeContex);
 
   return (
-    <div>
+    <div className="flex flex-wrap">
       {publicRecipes.map((recipe) => {
         return <Card key={recipe.id} recipe={recipe} />;
       })}

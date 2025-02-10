@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function Card({ recipe }) {
+export default function Card({ recipe, children }) {
   const dummyData = [
     {
       id: 1,
@@ -10,11 +10,11 @@ export default function Card({ recipe }) {
     },
   ];
   return (
-    <div className="">
+    <div className=" flex flex-col my-5 mx-5 justify-center items-start">
       <Link
         href={recipe.link}
         target="_blank"
-        className="flex my-5 mx-5 bg-slate-600 rounded-lg shadow-lg  w-80 h-80 flex-col"
+        className="flex  bg-slate-600 rounded-lg shadow-lg  w-80 h-80 flex-col"
       >
         <div className="p-5 m-auto flex items-center justify-around h-full flex-col text-center">
           <h1 className="text-white text-xl font-bold">{recipe.title}</h1>
@@ -24,6 +24,7 @@ export default function Card({ recipe }) {
           Click to Veiw Recipe
         </small>
       </Link>
+      {children}
     </div>
   );
 }
