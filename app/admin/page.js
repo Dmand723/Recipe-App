@@ -17,7 +17,7 @@ export default function Admin() {
 
   const editRecipeHandler = (r) => {
     setRecipeToEdit(r);
-    setEditOpen(!editOpen);
+    setEditOpen(true);
   };
 
   useEffect(() => {
@@ -26,12 +26,11 @@ export default function Admin() {
 
       setIsAdmin(check);
     };
-    if (!loading) {
+    if (!loading && user) {
       adminCheck();
     }
-  }, [loading, checkAdmin]);
-
-  if (!isAdmin) {
+  }, [loading, user]);
+  if (!isAdmin && user) {
     return (
       <div className="bg-black  min-h-screen flex items-center justify-center ">
         {/* <h1 className="text-white font-bold text-9xl">Unauthorized</h1> */}
@@ -39,10 +38,9 @@ export default function Admin() {
       </div>
     );
   }
-
   return (
     <div className="min-h-screen flex items-start justify-center">
-      {!loading ? (
+      {!loading && isAdmin ? (
         <div className="flex flex-col gap-10 justify-center items-center">
           <h1 className="admin-headers">Tools</h1>
           <div className="flex gap-7">
@@ -56,16 +54,18 @@ export default function Admin() {
             {publicRecipes.map((recipe) => {
               return (
                 <Card key={recipe.id} recipe={recipe}>
-                  <div>
-                    <button
-                      className="btn btn-edit"
-                      onClick={() => {
-                        editRecipeHandler(recipe);
-                      }}
-                    >
-                      Edit
-                    </button>
-                  </div>
+                  {!editOpen && (
+                    <div>
+                      <button
+                        className="btn btn-edit"
+                        onClick={() => {
+                          editRecipeHandler(recipe);
+                        }}
+                      >
+                        Edit
+                      </button>
+                    </div>
+                  )}
                 </Card>
               );
             })}

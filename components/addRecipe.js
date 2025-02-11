@@ -41,12 +41,13 @@ export default function AddRecipe() {
         placeholder="Title"
         ref={titleRef}
       />
-      <input
-        className="inputs"
+      <textarea
+        className="inputs h-[180px] resize-none"
         type="text"
         name="desc"
         placeholder="Description"
         ref={descRef}
+        maxLength={330}
       />
       <input
         className=" inputs"

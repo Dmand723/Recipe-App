@@ -45,7 +45,7 @@ export default function EditRecipe({ recipe, onClose }) {
         defaultValue={starterData.title}
       />
       <textarea
-        className="inputs"
+        className="inputs h-[180px] resize-none"
         type="text"
         name="desc"
         placeholder="Description"
@@ -66,6 +66,16 @@ export default function EditRecipe({ recipe, onClose }) {
       >
         Submit
       </button>
+      <div className="flex items-center justify-center mt-3">
+        <button
+          className="btn btn-danger "
+          onClick={() => {
+            onClose(false);
+          }}
+        >
+          Cancel
+        </button>
+      </div>
     </form>
   );
 }
