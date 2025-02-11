@@ -2,6 +2,7 @@
 
 import Card from "@/components/card";
 import { useContext } from "react";
+import Link from "next/link";
 import { recipeContex } from "@/lib/api-handler/recipeHandler";
 import { authContext } from "@/lib/api-handler/auth-contex";
 
@@ -14,7 +15,10 @@ export default function UserHome() {
   };
 
   return (
-    <div>
+    <div className="flex flex-col">
+      <Link href="/user/newRecipe" className="btn btn-add self-center my-5">
+        Add New Recipe
+      </Link>
       <h1 className="headers">Saved Recipes</h1>
       <div className="flex flex-wrap">
         {savedRecipes.map((recipe) => {
@@ -32,6 +36,7 @@ export default function UserHome() {
           );
         })}
       </div>
+      <h1 className="headers">Your Recipes</h1>
     </div>
   );
 }

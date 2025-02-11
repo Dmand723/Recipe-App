@@ -6,6 +6,10 @@
   body {
     @apply bg-stone-500;
   }
+  input,
+  label {
+    @apply transition-all duration-200;
+  }
 }
 
 @layer utilities {
@@ -23,6 +27,9 @@
   .btn-edit {
     @apply border bg-slate-600 border-yellow-600 text-yellow-600;
   }
+  .btn-add {
+    @apply border bg-slate-700 border-blue-400 text-blue-400 rounded-none;
+  }
 
   .btn-danger {
     @apply border bg-red-600 border-red-600 text-white;
@@ -37,12 +44,31 @@
     @apply mb-4 p-2 border border-gray-300 rounded w-full bg-blue-400 text-black;
   }
   .inputs::placeholder {
-    color: #0b2c65; /* Customize this color as needed */
+    color: #0b2c65;
   }
   .headers {
     @apply text-4xl font-bold text-center text-gray-800;
   }
   .cursor-love:hover {
     cursor: url("/love.ico"), pointer;
+  }
+
+  .toggle-checkbox:checked {
+    @apply right-0 border-blue-500;
+    right: 0;
+    border-color: #781105;
+  }
+
+  .toggle-checkbox:checked + .toggle-label {
+    @apply bg-blue-500;
+    background-color: #781105;
+  }
+
+  .toggle-checkbox {
+    @apply absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer;
+  }
+
+  .toggle-label {
+    @apply block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer;
   }
 }
