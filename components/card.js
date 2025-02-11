@@ -7,21 +7,20 @@ import { useContext, useState } from "react";
 import { authContext } from "@/lib/api-handler/auth-contex";
 import { recipeContex } from "@/lib/api-handler/recipeHandler";
 
-export default function Card({ recipe, children, page = "user" }) {
+export default function Card({ recipe, children, page = "home" }) {
   const { user } = useContext(authContext);
   const { addFavRecipe } = useContext(recipeContex);
 
   const onSaveHandler = (r) => {
     const data = {
-      id: r.id,
-      title: r.title,
+      ...r,
     };
     addFavRecipe(user.uid, data);
   };
   return (
     <div className="flex flex-col justify-center items-center">
       <div className=" flex flex-col my-5 mx-5 justify-center items-start bg-slate-600 rounded-lg shadow-lg">
-        {page == "user" && user ? (
+        {page == "home" && user ? (
           <FaRegStar
             onClick={() => {
               onSaveHandler(recipe);
@@ -29,7 +28,7 @@ export default function Card({ recipe, children, page = "user" }) {
             className="mt-2 ml-2 size-[30px] caret-rose-700 cursor-love"
           />
         ) : (
-          page == "user" &&
+          page == "home" &&
           !user && <small className="mt-2 ml-2">Please login in to save</small>
         )}
         <Link
