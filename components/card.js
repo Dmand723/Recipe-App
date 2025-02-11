@@ -1,16 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { FaRegStar } from "react-icons/fa";
+import { FaRegStar, FaStar } from "react-icons/fa";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { authContext } from "@/lib/api-handler/auth-contex";
 import { recipeContex } from "@/lib/api-handler/recipeHandler";
 
 export default function Card({ recipe, children, page = "user" }) {
   const { user } = useContext(authContext);
   const { addFavRecipe } = useContext(recipeContex);
-  const checkUserSavedRecipes = () => {};
+
   const onSaveHandler = (r) => {
     const data = {
       id: r.id,
