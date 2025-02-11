@@ -39,7 +39,7 @@
   .inputs::placeholder {
     color: #0b2c65; /* Customize this color as needed */
   }
-  .admin-headers {
+  .headers {
     @apply text-4xl font-bold text-center text-gray-800;
   }
 }

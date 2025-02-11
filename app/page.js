@@ -8,10 +8,13 @@ export default function Home() {
   const { publicRecipes } = useContext(recipeContex);
 
   return (
-    <div className="flex flex-wrap">
-      {publicRecipes.map((recipe) => {
-        return <Card key={recipe.id} recipe={recipe} />;
-      })}
+    <div>
+      <h1 className="headers">Find Some New Recipes</h1>
+      <div className="flex flex-wrap">
+        {publicRecipes.map((recipe) => {
+          return <Card key={recipe.id} recipe={recipe} />;
+        })}
+      </div>
     </div>
   );
 }

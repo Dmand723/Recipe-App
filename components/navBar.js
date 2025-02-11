@@ -6,19 +6,40 @@ import { authContext } from "@/lib/api-handler/auth-contex";
 import Link from "next/link";
 
 export default function NavBar() {
-  const { user, logout } = useContext(authContext);
-  return (
-    <div className="flex justify-end bg-emerald-900">
-      <h1>Recipe App</h1>
-      {!user ? (
-        <button className="btn btn-primary-outline">
-          <Link href="/login">Login</Link>
-        </button>
-      ) : (
-        <button onClick={logout} className="btn btn-danger ">
-          Logout
-        </button>
-      )}
-    </div>
-  );
+  const { user, logout, loading } = useContext(authContext);
+  if (!loading) {
+    return (
+      <div className="flex justify-between items-center bg-emerald-900 p-4">
+        <div className="text-center">
+          <Link href="/">
+            <h1 className="text-white text-2xl font-bold">Recipe App</h1>
+          </Link>
+        </div>
+        <div className="flex-1 flex justify-end">
+          {!user ? (
+            <Link href="/login">
+              <button className="btn btn-primary">Login</button>
+            </Link>
+          ) : (
+            <div className="flex gap-2">
+              <Link
+                href="/user"
+                className="h-[40px] w-[40px] rounded-full overflow-hidden cursor-pointer"
+              >
+                <img
+                  className="object-cover w-full h-full "
+                  src={user.photoURL}
+                  alt={user.displayName}
+                  referrerPolicy="no-referrer"
+                />
+              </Link>
+              <button onClick={logout} className="btn btn-danger">
+                Logout
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
 }

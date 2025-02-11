@@ -42,18 +42,18 @@ export default function Admin() {
     <div className="min-h-screen flex items-start justify-center">
       {!loading && isAdmin ? (
         <div className="flex flex-col gap-10 justify-center items-center">
-          <h1 className="admin-headers">Tools</h1>
+          <h1 className="headers">Tools</h1>
           <div className="flex gap-7">
             <AddRecipe />
             {editOpen && (
               <EditRecipe recipe={recipeToEdit} onClose={setEditOpen} />
             )}
           </div>
-          <h1 className="admin-headers">Public Recipes</h1>
+          <h1 className="headers">Public Recipes</h1>
           <div className="flex flex-wrap">
             {publicRecipes.map((recipe) => {
               return (
-                <Card key={recipe.id} recipe={recipe}>
+                <Card key={recipe.id} recipe={recipe} page="admin">
                   {!editOpen && (
                     <div>
                       <button
