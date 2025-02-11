@@ -42,4 +42,7 @@
   .headers {
     @apply text-4xl font-bold text-center text-gray-800;
   }
+  .cursor-love:hover {
+    cursor: url("/love.ico"), pointer;
+  }
 }
