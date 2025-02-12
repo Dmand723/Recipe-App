@@ -13,6 +13,9 @@
 }
 
 @layer utilities {
+  .seeThru {
+    background: rgba(0, 0, 0, 0.836);
+  }
   .btn {
     @apply px-4 py-2 text-sm capitalize rounded-xl;
   }
@@ -46,6 +49,12 @@
   .inputs::placeholder {
     color: #0b2c65;
   }
+  .inputs-edit {
+    @apply mb-4 p-2 border border-gray-300 rounded w-full bg-slate-500 text-black;
+  }
+  .inputs-edit::placeholder {
+    color: #1e3e4c;
+  }
   .headers {
     @apply text-4xl font-bold text-center text-gray-800;
   }
@@ -69,6 +78,6 @@
   }
 
   .toggle-label {
-    @apply block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer;
+    @apply block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer;
   }
 }

@@ -4,7 +4,7 @@ import { useContext, useState, useRef, useEffect } from "react";
 import { authContext } from "@/lib/api-handler/auth-contex";
 import { recipeContex } from "@/lib/api-handler/recipeHandler";
 import Card from "@/components/card";
-import AddRecipe from "@/components/addRecipe";
+import AddRecipe from "@/components/adminAddRecipe";
 import EditRecipe from "@/components/editRecipe";
 
 export default function Admin() {

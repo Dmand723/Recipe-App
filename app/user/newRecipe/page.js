@@ -1,9 +1,14 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
+import { authContext } from "@/lib/api-handler/auth-contex";
+import { recipeContex } from "@/lib/api-handler/recipeHandler";
+import { redirect } from "next/navigation";
 
 export default function AddRecipe() {
   const [isOn, setIsOn] = useState(false);
+  const { user } = useContext(authContext);
+  const { addUserRecipe } = useContext(recipeContex);
   const titleRef = useRef();
   const descRef = useRef();
   const linkRef = useRef();
@@ -11,10 +16,28 @@ export default function AddRecipe() {
   const handleToggle = () => {
     setIsOn(!isOn);
   };
+  const handleSubmit = () => {
+    const data = {
+      createdBy: user.displayName,
+      desc: descRef.current.value,
+      isPrivate: isOn,
+      link: linkRef.current.value,
+      title: titleRef.current.value,
+      uid: user.uid,
+    };
+    addUserRecipe(data);
+    redirect("/user");
+  };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <form className="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
+    <div className="min-h-screen flex items-center justify-center ">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
+        className="bg-blue-200 p-8 rounded-lg shadow-lg w-full max-w-2xl"
+      >
         <h1 className="headers mb-6">Add New Recipe</h1>
         <div className="mb-4">
           <label
@@ -44,7 +67,7 @@ export default function AddRecipe() {
             id="desc"
             name="desc"
             placeholder="Description"
-            maxLength={330}
+            maxLength={317}
             ref={descRef}
           />
         </div>

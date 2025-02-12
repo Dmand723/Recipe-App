@@ -38,7 +38,7 @@ export default function Card({ recipe, children, page = "home" }) {
         >
           <div className="p-5 m-auto flex items-center justify-around h-full flex-col text-center">
             <h1 className="text-white text-xl font-bold">{recipe.title}</h1>
-            <p>{recipe.desc}</p>
+            <p className="max-w-[320px] break-words  ">{recipe.desc}</p>
           </div>
           <small className="self-end mx-3 my-1 text-gray-400">
             Click to Veiw Recipe

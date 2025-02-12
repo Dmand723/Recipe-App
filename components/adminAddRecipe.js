@@ -47,7 +47,7 @@ export default function AddRecipe() {
         name="desc"
         placeholder="Description"
         ref={descRef}
-        maxLength={330}
+        maxLength={317}
       />
       <input
         className=" inputs"
