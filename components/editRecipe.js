@@ -1,5 +1,6 @@
 import { useRef, useContext } from "react";
 import { recipeContex } from "@/lib/api-handler/recipeHandler";
+import { toast } from "react-toastify";
 
 export default function EditRecipe({ recipe, onClose }) {
   const titleRef = useRef();
@@ -20,11 +21,11 @@ export default function EditRecipe({ recipe, onClose }) {
       desc: descRef.current.value,
       link: linkRef.current.value,
     };
-    console.log(data);
     editPublicRecipe(data);
     titleRef.current.value = "";
     descRef.current.value = "";
     linkRef.current.value = "";
+    toast.success(`Recipe Updated Succsessfully: ${data.title}`);
     onClose(false);
   };
   return (

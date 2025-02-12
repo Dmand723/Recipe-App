@@ -1,10 +1,14 @@
 import { useRef, useContext } from "react";
 import { recipeContex } from "@/lib/api-handler/recipeHandler";
+import { authContext } from "@/lib/api-handler/auth-contex";
+import { toast } from "react-toastify";
 
 export default function AddRecipe() {
   const titleRef = useRef();
   const descRef = useRef();
   const linkRef = useRef();
+
+  const { user } = useContext(authContext);
 
   const { addPublicRecipe } = useContext(recipeContex);
 
@@ -15,11 +19,12 @@ export default function AddRecipe() {
       link: linkRef.current.value,
     };
     const newRecipe = {
-      createdBy: user.displayName,
+      createdBy: "Admin",
       uid: user.uid,
       ...data,
     };
     addPublicRecipe(newRecipe);
+    toast.success(`Rescipe Added Successfully: ${data.title}`);
     titleRef.current.value = "";
     descRef.current.value = "";
     linkRef.current.value = "";

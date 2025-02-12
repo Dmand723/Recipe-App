@@ -4,6 +4,7 @@ import "./globals.css";
 import AuthContextProvider from "@/lib/api-handler/auth-contex";
 import RecipeContexProvider from "@/lib/api-handler/recipeHandler";
 import NavBar from "@/components/navBar";
+import { ToastContainer } from "react-toastify";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
       >
         <AuthContextProvider>
           <RecipeContexProvider>
+            <ToastContainer />
             <NavBar />
             {children}
           </RecipeContexProvider>

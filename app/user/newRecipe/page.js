@@ -4,6 +4,7 @@ import { useState, useRef, useContext } from "react";
 import { authContext } from "@/lib/api-handler/auth-contex";
 import { recipeContex } from "@/lib/api-handler/recipeHandler";
 import { redirect } from "next/navigation";
+import { toast } from "react-toastify";
 
 export default function AddRecipe() {
   const [isOn, setIsOn] = useState(false);
@@ -26,6 +27,7 @@ export default function AddRecipe() {
       uid: user.uid,
     };
     addUserRecipe(data);
+    toast.success(`Recipe ${data.title} added successfully`);
     redirect("/user");
   };
 

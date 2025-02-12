@@ -1,6 +1,7 @@
 import { recipeContex } from "@/lib/api-handler/recipeHandler";
 import { useRef, useState, useContext } from "react";
 import { authContext } from "@/lib/api-handler/auth-contex";
+import { toast } from "react-toastify";
 
 export default function EditModal({ show, onClose, data }) {
   const [isOn, setIsOn] = useState(data.isPrivate);
@@ -8,7 +9,7 @@ export default function EditModal({ show, onClose, data }) {
   const descRef = useRef(data.desc);
   const linkRef = useRef(data.link);
 
-  const { editUserRecipe } = useContext(recipeContex);
+  const { editUserRecipe, deleteRecipe } = useContext(recipeContex);
   const { user } = useContext(authContext);
 
   const handleToggle = () => {
@@ -27,6 +28,15 @@ export default function EditModal({ show, onClose, data }) {
     };
     editUserRecipe(newData);
     onClose(false);
+    toast.success(`Recipe ${newData.title} updated succsessfully`);
+  };
+
+  const handleDelete = () => {
+    try {
+      deleteRecipe(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -132,12 +142,21 @@ export default function EditModal({ show, onClose, data }) {
                 {isOn ? "Yes" : "No"}
               </span>
             </div>
-            <button
-              className="bg-slate-800 border-yellow-600 text-yellow-600 py-2 px-4 rounded w-full hover:bg-blue-600"
-              type="submit"
-            >
-              Edit
-            </button>
+            <div className="m-auto">
+              <button
+                className="bg-slate-800 border-yellow-600 text-yellow-600 py-2 px-12 rounded-3xl  hover:bg-slate-700 self-center mx-5"
+                type="submit"
+              >
+                Edit
+              </button>
+              {/* <button
+                onClick={handleDelete}
+                className="btn-delete"
+                type="submit"
+              >
+                Delete
+              </button> DELETE FUNTION NOT WORK FIX!!!*/}
+            </div>
           </form>
         </div>
       </div>

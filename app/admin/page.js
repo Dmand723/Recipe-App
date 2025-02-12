@@ -6,6 +6,7 @@ import { recipeContex } from "@/lib/api-handler/recipeHandler";
 import Card from "@/components/card";
 import AddRecipe from "@/components/adminAddRecipe";
 import EditRecipe from "@/components/editRecipe";
+import { toast } from "react-toastify";
 
 export default function Admin() {
   const { checkAdmin, user, loading } = useContext(authContext);

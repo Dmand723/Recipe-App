@@ -7,6 +7,7 @@ import { recipeContex } from "@/lib/api-handler/recipeHandler";
 import { authContext } from "@/lib/api-handler/auth-contex";
 import EditModal from "@/components/EditModal";
 import { redirect } from "next/navigation";
+import { toast } from "react-toastify";
 
 export default function UserHome() {
   const [editShow, setEditShow] = useState(false);
@@ -17,17 +18,18 @@ export default function UserHome() {
 
   const onRemoveHandler = (toRemove) => {
     removeFavRecipe(toRemove, user.uid);
+    toast.warn(`Recipe ${toRemove.title} remove from favorites`);
   };
   if (!user) {
     redirect("/login");
   }
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-6">
       {editShow && (
         <EditModal show={editShow} onClose={setEditShow} data={recipeToEdit} />
       )}
 
-      <h1 className="headers">Saved Recipes</h1>
+      <h1 className="headers my-4">Saved Recipes</h1>
       <div className="flex flex-wrap">
         {savedRecipes.map((recipe) => {
           return (
@@ -51,7 +53,7 @@ export default function UserHome() {
       <div className="flex flex-wrap">
         {userRecipes.map((recipe) => {
           return (
-            <Card key={recipe.id} recipe={recipe} page="user">
+            <Card key={recipe.id} recipe={recipe} page="user-usersRecipes">
               <button
                 onClick={() => {
                   setRecipeToEdit(recipe);
