@@ -21,7 +21,7 @@ export default function UserHome() {
     toast.warn(`Recipe ${toRemove.title} remove from favorites`);
   };
   if (!user) {
-    redirect("/login");
+    return <h1 className="headers">Please Log In</h1>;
   }
   return (
     <div className="flex flex-col gap-6">

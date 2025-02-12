@@ -4,20 +4,33 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 First, run install all required packages
 
-````bash
+```bash
 npm install
+```
 
-Then, run the development server:
+Then, build the project:
 
 ```bash
-npm run dev
+npm run build
 # or
-yarn dev
+yarn build
 # or
-pnpm dev
+pnpm build
 # or
-bun dev
-````
+bun build
+```
+
+Then, start the project:
+
+```bash
+npm run start
+# or
+yarn start
+# or
+pnpm start
+# or
+bun start
+```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
